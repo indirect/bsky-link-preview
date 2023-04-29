@@ -46,7 +46,7 @@
                     return;
                 }
 
-                const url = new URL(`${HOST}/?url=` + e.target.url.value);
+                const url = new URL("<%= HOST %>/?url=" + e.target.url.value);
                 const iframe = document.createElement('iframe');
                 iframe.src = url;
                 iframe.width = '100%';

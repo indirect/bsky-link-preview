@@ -38,7 +38,7 @@ app.route("/").get(async (req, res) => {
 
     if (!url) {
         // load home.ejs
-        res.render("home");
+        res.render("home", { HOST: HOST });
         return;
     }
 
