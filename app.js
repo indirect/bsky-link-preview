@@ -28,6 +28,7 @@ var token = "";
 
 xhr.onreadystatechange = function () {
     if (this.readyState == 4) {
+        console.log(this.responseText)
         token = JSON.parse(this.responseText).accessJwt;
     }
 }
@@ -43,12 +44,14 @@ app.route("/").get(async (req, res) => {
 
     if (!url.match(/https:\/\/(?:staging\.)?bsky\.app\/profile\/[a-z0-9.]+\/post\/[a-z0-9]+/)) {
         // send 400
+        console.log("bad match")
         res.status(400).send("Invalid URL.");
         return;
     }
 
     var handle = new URL(url).pathname.split("/")[2];
     var post_id = new URL(url).pathname.split("/")[4];
+    console.log({handle, post_id})
 
     fetch("https://bsky.social/xrpc/com.atproto.identity.resolveHandle?handle=" + handle, {
         method: "GET",
@@ -58,6 +61,7 @@ app.route("/").get(async (req, res) => {
         }
     }).then((response) => {
         response.json().then((did) => {
+            console.log(did)
             fetch(`https://bsky.social/xrpc/app.bsky.feed.getPostThread?uri=at://${did.did}/app.bsky.feed.post/${post_id}&depth=0`, {
                 method: "GET",
                 headers: {
@@ -66,6 +70,7 @@ app.route("/").get(async (req, res) => {
                 },
             }).then((response) => {
                 response.json().then((data) => {
+                    console.log(data)
                     if (data.thread.post.embed && data.thread.post.embed.record) {
                         var embed = data.thread.post.embed.record;
                         var embed_type = "record";
