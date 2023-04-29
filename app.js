@@ -8,6 +8,7 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const PORT = process.env.PORT || 3008;
+const HOST = process.env.HOST || "http://localhost:3008"
 
 const app = express();
 
@@ -80,7 +81,7 @@ app.route("/").get(async (req, res) => {
                         author: data.thread.post.author,
                         embed: embed,
                         embed_type: embed_type,
-                        url: "https://bsky.link/?url=" + url
+                        url: `${HOST}/?url=` + url
                     });
                 });
             });
