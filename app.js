@@ -40,7 +40,7 @@ app.route("/").get(async (req, res) => {
         return;
     }
 
-    if (!url.match(/https:\/\/staging.bsky.app\/profile\/[a-z0-9]+\.bsky\.social\/post\/[a-z0-9]+/)) {
+    if (!url.match(/https:\/\/(?:staging\.)?bsky\.app\/profile\/[a-z0-9.]+\/post\/[a-z0-9]+/)) {
         // send 400
         res.status(400).send("Invalid URL.");
         return;
