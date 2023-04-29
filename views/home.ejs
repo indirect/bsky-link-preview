@@ -41,7 +41,7 @@
             document.querySelector('form').addEventListener('submit', function(e) {
                 e.preventDefault();
                 // https://bsky.link
-                if (!e.target.url.value.match(/https:\/\/staging.bsky.app\/profile\/[a-z0-9]+\.bsky\.social\/post\/[a-z0-9]+/)) {
+                if (!e.target.url.value.match(/https:\/\/(?:staging\.)?bsky\.app\/profile\/[a-z0-9.]+\/post\/[a-z0-9]+/)) {
                     alert('Please enter a valid Bluesky Post URL.');
                     return;
                 }
