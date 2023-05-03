@@ -16,26 +16,30 @@
 
         <link rel="icon" href="https://bsky.link/favicon.png" type="image/x-icon" />
 
+        <% if (embed_type == "images") { %>
+            <meta property="og:image" content="<%= embed[0].fullsize %>" />
+        <% } %>
+
         <link rel="stylesheet" href="/styles.css">
     </head>
     <body>
-        <main>
-            <div class="author">
-                <img src="<%= author.avatar %>" alt="<%= author.displayName %>'s profile picture" height="50" width="50">
+        <main class="h-entry">
+            <div class="author p-author h-card">
+                <img src="<%= author.avatar %>" alt="<%= author.displayName %>'s profile picture" height="50" width="50" class="u-photo">
                 <div class="author-name">
                     <h2><%= author.displayName %></h2>
-                    <p><%= author.handle %></p>
+                    <p class="p-nickname"><a href="https://staging.bsky.app/profile/<%= author.handle %>" class="u-url"><%= author.handle %></a></p>
                 </div>
             </div>
             <%= data.record %>
             <blockquote>
-                <%= data.text %>
+                <span class="e-content"><%= data.text %></span>
                 <% if (embed_type == "record") { %>
                     <div class="embed inner-embed">
                         <div class="author">
                             <img src="<%= embed.author.avatar %>" alt="<%= embed.author.displayName %>'s profile picture" height="50" width="50">
                             <div class="author-name">
-                                <h2><%= embed.author.displayName %></h2>
+                                <h2><a href="https://staging.bsky.app/profile/<%= embed.author.handle %>" class="u-url"><%= embed.author.displayName %></a></h2>
                                 <p><%= embed.author.handle %></p>
                             </div>
                         </div>
@@ -45,10 +49,16 @@
                     </div>
                 <% } else if (embed_type == "images") { %>
                     <% for (let i = 0; i < embed.length; i++) { %>
-                        <img src="<%= embed[i].fullsize %>" alt="<%= embed[i].alt %>" class="embedded-image" />
+                        <img src="<%= embed[i].fullsize %>" alt="<%= embed[i].alt %>" class="embedded-image u-image" />
                     <% } %>
                 <% } %>
             </blockquote>
+            <a href="<%= post_url %>" class="permalink u-url u-uid"><time class="dt-published datelink" datetime="<%= created_at %>"><%= created_at %></time></a>
+            <div class="post-actions">
+                <a href="<%= post_url %>">❤️ <%= like_count %> likes</a>
+                <a href="<%= post_url %>">🔄 <%= repost_count %> reposts</a>
+                <a href="<%= post_url %>">💬 <%= reply_count %> replies</a>
+            </div>
         </main>
     </body>
 </html>

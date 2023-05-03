@@ -63,3 +63,17 @@ button {
     margin-top: 10px;
     font-size: 1em;
 }
+.datelink {
+    color: grey;
+    text-decoration: none;
+    font-size: 0.8em;
+    margin-bottom: 10px;
+    display: block;
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+li, .reposted-by {
+    margin-bottom: 30px;
+}
