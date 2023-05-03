@@ -1,10 +1,15 @@
-# fly.toml file generated for bsky-link on 2023-04-29T13:39:05-07:00
+# fly.toml app configuration file generated for bsky-link on 2023-05-03T15:53:13-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
 
 app = "bsky-link"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "sjc"
 processes = []
+
+[build]
 
 [env]
   PORT = "8080"
